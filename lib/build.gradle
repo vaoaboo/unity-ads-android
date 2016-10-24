@@ -1,8 +1,8 @@
 apply plugin: 'com.android.library'
 
 android {
-  compileSdkVersion 24
-  buildToolsVersion "24.0.2"
+  compileSdkVersion 23
+  buildToolsVersion "23.0.3"
   com.android.ddmlib.DdmPreferences.setLogLevel("verbose")
   com.android.ddmlib.DdmPreferences.setTimeOut(10 * 60000)
 
@@ -19,9 +19,9 @@ android {
 
     buildConfigField 'String', 'WEBVIEW_BRANCH', getPropertyStringWithDefaultValue('WEBVIEW_BRANCH', '"' + versionName + '"')
 
-    testBuildType "coverage"
-    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-    testInstrumentationRunnerArguments disableAnalytics: 'true' // Won't work yet, see: https://code.google.com/p/android/issues/detail?id=188241
+    //testBuildType "coverage"
+    //testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    //testInstrumentationRunnerArguments disableAnalytics: 'true' // Won't work yet, see: https://code.google.com/p/android/issues/detail?id=188241
   }
 
   compileOptions {
@@ -41,28 +41,28 @@ android {
       consumerProguardFiles 'proguard-rules.pro'
       buildConfigField 'String', 'WEBVIEW_BRANCH', getPropertyStringWithDefaultValue('WEBVIEW_BRANCH', '"master"')
     }
-    coverage {
-      testCoverageEnabled true
-      consumerProguardFiles 'proguard-rules.pro'
-      signingConfig signingConfigs.debug
-      buildConfigField 'String', 'WEBVIEW_BRANCH', getPropertyStringWithDefaultValue('WEBVIEW_BRANCH', '"master"')
-      sonarqube {
-        properties {
-          property "sonar.projectKey", "unity-ads-android"
-          property "sonar.projectName", "UnityAds SDK Android"
-          property "sonar.projectVersion", "2.0.0"
-          property "sonar.sourceEncoding", "UTF-8"
-          property "sonar.host.url", "${System.env.SONAR_HOST}"
-          property "sonar.language", "java"
-          property "sonar.sources", "lib/src"
-          property "sonar.java.binaries", "lib/build/intermediates/classes/coverage/"
-          property "sonar.java.libraries", "${System.env.ANDROID_SDK_ROOT}/platforms/android-23/android.jar"
-          property "sonar.projectBaseDir", "."
-          property "sonar.junit.reportsPath", "lib/build/outputs/androidTest-results/connected"
-          property "sonar.jacoco.reportPath", "lib/build/outputs/code-coverage/connected/coverage.ec"
-        }
-      }
-    }
+    //coverage {
+    //  testCoverageEnabled true
+    //  consumerProguardFiles 'proguard-rules.pro'
+    //  signingConfig signingConfigs.debug
+    //  buildConfigField 'String', 'WEBVIEW_BRANCH', getPropertyStringWithDefaultValue('WEBVIEW_BRANCH', '"master"')
+    //  sonarqube {
+    //    properties {
+    //      property "sonar.projectKey", "unity-ads-android"
+    //      property "sonar.projectName", "UnityAds SDK Android"
+    //      property "sonar.projectVersion", "2.0.0"
+    //      property "sonar.sourceEncoding", "UTF-8"
+    //      property "sonar.host.url", "${System.env.SONAR_HOST}"
+    //      property "sonar.language", "java"
+    //      property "sonar.sources", "lib/src"
+    //      property "sonar.java.binaries", "lib/build/intermediates/classes/coverage/"
+    //      property "sonar.java.libraries", "${System.env.ANDROID_SDK_ROOT}/platforms/android-23/android.jar"
+    //      property "sonar.projectBaseDir", "."
+    //      property "sonar.junit.reportsPath", "lib/build/outputs/androidTest-results/connected"
+    //      property "sonar.jacoco.reportPath", "lib/build/outputs/code-coverage/connected/coverage.ec"
+    //    }
+    //  }
+    //}
   }
 }
 
