@@ -29,11 +29,15 @@ public class CacheDirectory {
 
 			if(Build.VERSION.SDK_INT > 18) {
 				if(Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
-					File externalCache = createCacheDirectory(context.getExternalCacheDir(), _cacheDirName);
-					if(testCacheDirectory(externalCache)) {
-						_cacheDirectory = externalCache;
-						DeviceLog.debug("Unity Ads is using external cache directory: " + externalCache.getAbsolutePath());
-						return _cacheDirectory;
+					try {
+						File externalCache = createCacheDirectory(context.getExternalCacheDir(), _cacheDirName);
+						if (testCacheDirectory(externalCache)) {
+							_cacheDirectory = externalCache;
+							DeviceLog.debug("Unity Ads is using external cache directory: " + externalCache.getAbsolutePath());
+							return _cacheDirectory;
+						}
+					}catch (NullPointerException ex){
+						DeviceLog.debug("External media not mounted");
 					}
 				} else {
 					DeviceLog.debug("External media not mounted");
