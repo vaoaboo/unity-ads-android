@@ -1,6 +1,7 @@
 package com.unity3d.ads.adunit;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -12,13 +13,11 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
-import android.widget.VideoView;
 
 import com.unity3d.ads.api.AdUnit;
-import com.unity3d.ads.device.Device;
+import com.unity3d.ads.api.VideoPlayer;
 import com.unity3d.ads.log.DeviceLog;
 import com.unity3d.ads.misc.ViewUtilities;
-import com.unity3d.ads.api.VideoPlayer;
 import com.unity3d.ads.video.VideoPlayerView;
 import com.unity3d.ads.webview.WebViewApp;
 import com.unity3d.ads.webview.WebViewEventCategory;
@@ -27,8 +26,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class AdUnitActivity extends Activity {
 
@@ -411,6 +408,10 @@ public class AdUnitActivity extends Activity {
 			VideoPlayer.getVideoPlayerView().setLayoutParams(params);
 			_videoContainer.addView(VideoPlayer.getVideoPlayerView());
 		}
+	}
+
+	@Override protected void attachBaseContext(Context base) {
+		super.attachBaseContext(BojoAudioManagerLeak.preventLeakOf(base));
 	}
 
 	private void destroyVideoPlayer () {
